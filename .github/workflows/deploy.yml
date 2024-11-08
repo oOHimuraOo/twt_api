@@ -25,7 +25,7 @@ jobs:
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         env:
-          DJANGO_SECRET_KEY: '5b_41$%31d_o_vgrilx2&x)$m(7sau$$uf41lm-0(it&q%l(vb'  # Chave secreta fixa
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-args: '--prod --yes'
