@@ -1,8 +1,16 @@
 {
+    "builds": [{
+        "src": "tweeter_clone/wsgi.py",
+        "use": "@vercel/python",
+        "config": {
+            "maxLambdaSize": "15mb",
+            "runtime": "python3.12"
+        }
+    }],
     "routes": [
         {
-        "src": "/(.*)",
-        "dest": "api/wsgi.py"
+            "src": "/(.*)",
+            "dest": "tweeter_clone/wsgi.py"
         }
     ]
 }
