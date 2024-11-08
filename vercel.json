@@ -2,21 +2,17 @@
     "version": 2,
     "builds": [
       {
-        "src": "wsgi.py",
-        "use": "@vercel/python"
+        "src": "manage.py",
+        "use": "@vercel/python",
+        "config": {
+          "maxLambdaSize": "50mb"
+        }
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/wsgi.py"
+        "dest": "manage.py"
       }
-    ],
-    "env": {
-      "DJANGO_SECRET_KEY": "@django-secret-key",
-      "DJANGO_ALLOWED_HOSTS": "localhost, vercel.com",
-      "DATABASE_URL": "@your-database-url" 
-    },
-    "installCommand": "pip install -r requirements.txt"
+    ]
   }
-  
