@@ -2,17 +2,15 @@
     "version": 2,
     "builds": [
       {
-        "src": "manage.py",
-        "use": "@vercel/python",
-        "config": {
-          "maxLambdaSize": "50mb"
-        }
+        "src": "seu_projeto/asgi.py",
+        "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "manage.py"
+        "dest": "seu_projeto/asgi.py"
       }
     ]
   }
+  
