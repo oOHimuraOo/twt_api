@@ -9,6 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'nome', 'senha', 'profile', 'logged_in', 'tweets']
 
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
 
 class TweetSerializer(serializers.ModelSerializer):
     owner_name = serializers.CharField(source='owner.nome', read_only=True)
