@@ -9,34 +9,45 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+
 import os
 from pathlib import Path
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATIC_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# DATABASE_URL environment variable
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://postgres:hoUkVomgIjtufpCYnDGUCuNDqtRemaxm@junction.proxy.rlwy.net:40131/railway')
+
+# Parsing the DATABASE_URL
+result = urlparse(DATABASE_URL)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY = '5b_41$%31d_o_vgrilx2&x)$m(7sau$$uf41lm-0(it&q%l(vb'
+SECRET_KEY = '5b_41$%31d_o_vgrilx2&x)$m(7sau$$uf41lm-0(it&q%l(vb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'localhost']
 
+# CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_METHODS = [ "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS" ]
-# Application definition
 
+# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -78,19 +89,19 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "tweeter_clone.wsgi.app"
+WSGI_APPLICATION = "tweeter_clone.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# Database configuration
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": result.path[1:],  # The database name is the path component of the URL, excluding the leading '/'
+        'USER': result.username,
+        'PASSWORD': result.password,
+        'HOST': result.hostname,
+        'PORT': result.port,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -110,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -121,7 +131,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
