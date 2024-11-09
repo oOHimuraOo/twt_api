@@ -21,6 +21,8 @@ class Tweet(models.Model):
     owner = models.ForeignKey(User, related_name='tweets', on_delete=models.CASCADE)
     post = models.TextField(blank=False, null=False)
     image = models.URLField(blank=True)
+    data_postagem = models.DateField(auto_now_add=True)
+    hora_postagem = models.TimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         if not self.image:

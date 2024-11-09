@@ -15,9 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class TweetSerializer(serializers.ModelSerializer):
     owner_name = serializers.CharField(source='owner.nome', read_only=True)
 
     class Meta:
         model = Tweet
-        fields = ['id', 'owner', 'owner_name', 'image', 'post']
+        fields = ['id', 'owner', 'owner_name', 'image', 'post', 'data_postagem', 'hora_postagem']
+

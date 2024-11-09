@@ -89,7 +89,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "tweeter_clone.wsgi.application"
+WSGI_APPLICATION = "tweeter_clone.wsgi.app"
 
 # Database configuration
 DATABASES = {
