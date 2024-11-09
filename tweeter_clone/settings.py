@@ -34,7 +34,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'localhost']
 
 CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ALLOW_METHODS = [ "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS" ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "tweeter_clone.wsgi.application"
+WSGI_APPLICATION = "tweeter_clone.wsgi.app"
 
 
 # Database
